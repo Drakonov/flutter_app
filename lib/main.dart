@@ -133,11 +133,35 @@ class NewsBox extends StatelessWidget {
   }
 }
 
+class MyList extends StatefulWidget {
+
+  @override
+  createState() => new MyListState();
+}
+
+class MyListState extends State<MyList>{
+  @override
+  Widget build(BuildContext context) {
+    return new ListView(children: <Widget>[
+      new Text('0000'),
+      new Divider(),
+
+      new Text ('0001'),
+      new Divider(),
+
+      new Text ('0002'),
+    ]);
+  }
+}
+
 void main() {
   runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
           appBar: new AppBar(),
-          body: new NewsBox('Дядь привет', 'С днем родждения ублюдок',
-              imageurl: 'https://flutter.su/favicon.png', num: 10))));
+          body: new MyList()
+              //new NewsBox('Дядь привет', 'С днем родждения ублюдок',
+              //imageurl: 'https://flutter.su/favicon.png', num: 10)
+        )
+      ));
 }
