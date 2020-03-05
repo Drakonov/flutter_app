@@ -2,8 +2,66 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/UnlessListView.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:validators/validators.dart';
+import 'package:validators/sanitizers.dart';
 
+class NewsBox extends StatelessWidget {
+  final String _title;
+  final String _text;
+  String _imageurl;
+  int _num;
+  bool _like;
 
+  NewsBox(this._title, this._text,
+      {String imageurl, int num = 0, bool like = false}) {
+    _imageurl = imageurl;
+    _num = num;
+    _like = like;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_imageurl != null && _imageurl != '')
+      return new Container(
+        color: Colors.black12,
+        height: 100.0,
+        child: new Row(children: [
+          new Image.network(_imageurl,
+              width: 100.0, height: 100.0, fit: BoxFit.cover),
+          new Expanded(
+              child: new Container(
+                  padding: new EdgeInsets.all(5.0),
+                  child: new Column(children: [
+                    new Text(_title,
+                        style: new TextStyle(fontSize: 20.0),
+                        overflow: TextOverflow.ellipsis),
+                    new Expanded(
+                        child: new Text(_text,
+                            softWrap: true, textAlign: TextAlign.justify))
+                  ]))),
+          new NewsBoxFavourit(_num, _like)
+        ]),
+      );
+    return new Container(
+      child: new Row(
+        children: [
+          new Expanded(
+              child: new Container(
+                  padding: new EdgeInsets.all(5.0),
+                  child: new Column(children: [
+                    new Text(_title,
+                        style: TextStyle(fontSize: 20.0),
+                        overflow: TextOverflow.ellipsis),
+                    new Expanded(
+                        child: new Text(_text,
+                            softWrap: true, textAlign: TextAlign.justify))
+                  ]))),
+          new NewsBoxFavourit(_num, _like)
+        ],
+      ),
+    );
+  }
+}
 class NewsBoxFavourit extends StatefulWidget {
   final int _num;
   final bool _like;
@@ -13,7 +71,6 @@ class NewsBoxFavourit extends StatefulWidget {
   @override
   createState() => new NewsBoxFavoriteState(_num, _like);
 }
-
 class NewsBoxFavoriteState extends State<NewsBoxFavourit> {
   int num;
   bool like;
@@ -77,70 +134,11 @@ class MyBody extends StatelessWidget {
   }
 }
 
-class NewsBox extends StatelessWidget {
-  final String _title;
-  final String _text;
-  String _imageurl;
-  int _num;
-  bool _like;
-
-  NewsBox(this._title, this._text,
-      {String imageurl, int num = 0, bool like = false}) {
-    _imageurl = imageurl;
-    _num = num;
-    _like = like;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_imageurl != null && _imageurl != '')
-      return new Container(
-        color: Colors.black12,
-        height: 100.0,
-        child: new Row(children: [
-          new Image.network(_imageurl,
-              width: 100.0, height: 100.0, fit: BoxFit.cover),
-          new Expanded(
-              child: new Container(
-                  padding: new EdgeInsets.all(5.0),
-                  child: new Column(children: [
-                    new Text(_title,
-                        style: new TextStyle(fontSize: 20.0),
-                        overflow: TextOverflow.ellipsis),
-                    new Expanded(
-                        child: new Text(_text,
-                            softWrap: true, textAlign: TextAlign.justify))
-                  ]))),
-          new NewsBoxFavourit(_num, _like)
-        ]),
-      );
-    return new Container(
-      child: new Row(
-        children: [
-          new Expanded(
-              child: new Container(
-                  padding: new EdgeInsets.all(5.0),
-                  child: new Column(children: [
-                    new Text(_title,
-                        style: TextStyle(fontSize: 20.0),
-                        overflow: TextOverflow.ellipsis),
-                    new Expanded(
-                        child: new Text(_text,
-                            softWrap: true, textAlign: TextAlign.justify))
-                  ]))),
-          new NewsBoxFavourit(_num, _like)
-        ],
-      ),
-    );
-  }
-}
-
 class MyList extends StatefulWidget {
 
   @override
   createState() => new MyListState();
 }
-
 class MyListState extends State<MyList>{
   @override
   Widget build(BuildContext context) {
