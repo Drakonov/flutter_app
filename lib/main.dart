@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/UnlessListView.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class NewsBoxFavourit extends StatefulWidget {
   final int _num;
@@ -144,9 +146,12 @@ class MyListState extends State<MyList>{
   Widget build(BuildContext context) {
     return new ListView(children: <Widget>[
       new Text('0000'),
+      new MyBody(),
       new Divider(),
 
       new Text ('0001'),
+      new NewsBox('Hello', 'Hello world',
+        imageurl: 'https://flutter.su/favicon.png', num: 10),
       new Divider(),
 
       new Text ('0002'),
@@ -159,9 +164,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
           appBar: new AppBar(),
-          body: new MyList()
-              //new NewsBox('Дядь привет', 'С днем родждения ублюдок',
-              //imageurl: 'https://flutter.su/favicon.png', num: 10)
-        )
-      ));
+          body: new UnlessListView(),
+      )
+  ));
 }
