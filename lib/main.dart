@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Calculator.dart';
 import 'package:flutter_app/UnlessListView.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:validators/validators.dart';
@@ -162,7 +163,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
           appBar: new AppBar(),
-          body: new UnlessListView(),
+          body: new Calculator(),
       )
   ));
 }
