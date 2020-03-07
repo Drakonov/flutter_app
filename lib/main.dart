@@ -162,7 +162,7 @@ void main() {
   runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
-          appBar: new AppBar(),
+          appBar: new AppBar(title: const Text('Ебаный калькулятор')),
           body: new Calculator(),
       )
   ));
