@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Calculator.dart';
+import 'package:flutter_app/SecondScreen.dart';
 import 'package:flutter_app/UnlessListView.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:validators/validators.dart';
@@ -157,13 +158,21 @@ class MyListState extends State<MyList>{
     ]);
   }
 }
+class MainScreen extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title :Text('Main Screen')),
+      body: Center(child: RaisedButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>SecondScreen()));
+      },child: Text ('Go to second screen'),),),
+    );
+  }
+}
 
 void main() {
   runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new Scaffold(
-          appBar: new AppBar(title: const Text('Ебаный калькулятор')),
-          body: new Calculator(),
-      )
+      home: MainScreen(),
   ));
 }
