@@ -107,7 +107,6 @@ class NewsBoxFavoriteState extends State<NewsBoxFavourit> {
         ),
       ))
     ]);
-    return null;
   }
 }
 
@@ -163,16 +162,36 @@ class MainScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title :Text('Main Screen')),
-      body: Center(child: RaisedButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>SecondScreen()));
-      },child: Text ('Go to second screen'),),),
+      body: Center(child: Column(
+        children: <Widget>[
+          RaisedButton(onPressed: (){
+            Navigator.pushNamed(context, '/second');
+          },child: Text ('Go to second screen'),),
+          RaisedButton(onPressed: (){
+            Navigator.pushNamed(context, '/second/123');
+          },child: Text ('Go to second screen 123'),),
+        ],
+      ),),
     );
   }
 }
 
 void main() {
   runApp(new MaterialApp(
+      initialRoute: '/second',
+      routes: {
+        '/':(BuildContext context) => MainScreen(),
+        '/second': (BuildContext context) => SecondScreen()
+      },
+    // ignore: missing_return
+    onGenerateRoute: (routeSettings){
+        var path = routeSettings.name.split('/');
+
+        if (path[1] == "second"){
+          return new MaterialPageRoute(builder: (context)=> SecondScreen(id:path[2]),
+          settings: routeSettings);
+        }
+    },
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
   ));
 }
