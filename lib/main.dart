@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/AsyncAwait.dart';
 import 'package:flutter_app/Calculator.dart';
 import 'package:flutter_app/SecondScreen.dart';
 import 'package:flutter_app/UnlessListView.dart';
@@ -170,6 +171,9 @@ class MainScreen extends StatelessWidget{
           RaisedButton(onPressed: (){
             Navigator.pushNamed(context, '/second/123');
           },child: Text ('Go to second screen 123'),),
+          RaisedButton(onPressed: (){
+            Navigator.pushNamed(context, '/async');
+          },child: Text ('Go to async'),),
         ],
       ),),
     );
@@ -178,10 +182,11 @@ class MainScreen extends StatelessWidget{
 
 void main() {
   runApp(new MaterialApp(
-      initialRoute: '/second',
+      initialRoute: '/',
       routes: {
         '/':(BuildContext context) => MainScreen(),
-        '/second': (BuildContext context) => SecondScreen()
+        '/second': (BuildContext context) => SecondScreen(),
+        '/async' : (BuildContext context) => AsyncAwait()
       },
     // ignore: missing_return
     onGenerateRoute: (routeSettings){
